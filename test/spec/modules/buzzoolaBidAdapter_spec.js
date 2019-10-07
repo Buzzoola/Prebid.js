@@ -125,6 +125,8 @@ const REQUIRED_VIDEO_FIELDS = [
   'mediaType'
 ];
 
+// TODO: native bid
+
 describe('buzzoolaBidAdapter', () => {
   const adapter = newBidder(spec);
 
