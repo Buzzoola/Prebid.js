@@ -1,9 +1,9 @@
 import { expect } from 'chai';
-import { spec } from 'modules/smilewantedBidAdapter';
-import { newBidder } from 'src/adapters/bidderFactory';
-import { config } from 'src/config';
-import * as utils from 'src/utils';
-import { requestBidsHook } from 'modules/consentManagement';
+import { spec } from 'modules/smilewantedBidAdapter.js';
+import { newBidder } from 'src/adapters/bidderFactory.js';
+import { config } from 'src/config.js';
+import * as utils from 'src/utils.js';
+import { requestBidsHook } from 'modules/consentManagement.js';
 
 const DISPLAY_REQUEST = [{
   adUnitCode: 'sw_300x250',
@@ -151,11 +151,11 @@ describe('smilewantedBidAdapterTests', function () {
   it('SmileWanted - Verify build request with referrer', function () {
     const request = spec.buildRequests(DISPLAY_REQUEST, {
       refererInfo: {
-        referer: 'http://localhost/Prebid.js/integrationExamples/gpt/hello_world.html'
+        referer: 'https://localhost/Prebid.js/integrationExamples/gpt/hello_world.html'
       }
     });
     const requestContent = JSON.parse(request[0].data);
-    expect(requestContent).to.have.property('pageDomain').and.to.equal('http://localhost/Prebid.js/integrationExamples/gpt/hello_world.html');
+    expect(requestContent).to.have.property('pageDomain').and.to.equal('https://localhost/Prebid.js/integrationExamples/gpt/hello_world.html');
   });
 
   describe('gdpr tests', function () {
@@ -305,12 +305,12 @@ describe('smilewantedBidAdapterTests', function () {
   });
 
   it('SmileWanted - Verify user sync', function () {
-    var syncs = spec.getUserSyncs({
-      iframeEnabled: true
-    }, [BID_RESPONSE_DISPLAY]);
+    var syncs = spec.getUserSyncs({iframeEnabled: true}, {}, {
+      consentString: 'foo'
+    }, '1NYN');
     expect(syncs).to.have.lengthOf(1);
     expect(syncs[0].type).to.equal('iframe');
-    expect(syncs[0].url).to.equal('https://csync.smilewanted.com');
+    expect(syncs[0].url).to.equal('https://csync.smilewanted.com?gdpr_consent=foo&us_privacy=1NYN');
 
     syncs = spec.getUserSyncs({
       iframeEnabled: false
@@ -320,6 +320,6 @@ describe('smilewantedBidAdapterTests', function () {
     syncs = spec.getUserSyncs({
       iframeEnabled: true
     }, []);
-    expect(syncs).to.have.lengthOf(0);
+    expect(syncs).to.have.lengthOf(1);
   });
 });
