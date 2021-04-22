@@ -15,22 +15,62 @@
         var FAILSAFE_TIMEOUT = 3300;
         var PREBID_TIMEOUT = 1000;
 
-        var adUnits = [{
-            code: 'div-gpt-ad-1460505748561-0',
-            mediaTypes: {
-                banner: {
-                    sizes: [[300, 250], [300,600]],
-                }
+        var adUnits = [
+            // Banner adUnit
+            {
+                code: 'banner-div',
+                mediaTypes: {
+                    banner: {
+                        sizes: [[240, 400], [300, 600]],
+                    }
+                },
+                bids: [{
+                    bidder: 'buzzoola',
+                    params: {
+                        placementId: 417845
+                    }
+                }]
             },
-            // Replace this object to test a new Adapter!
-            bids: [{
-                bidder: 'appnexus',
-                params: {
-                    placementId: 13144370
-                }
-            }]
-
-        }];
+            // Video instream adUnit
+            {
+                code: 'video-instream',
+                mediaTypes: {
+                    video: {
+                        context: 'instream',
+                        playerSize: [640, 380],
+                        mimes: ['video/mp4'],
+                        minduration: 1,
+                        maxduration: 2,
+                    }
+                },
+                bids: [{
+                    bidder: 'buzzoola',
+                    params: {
+                        placementId: 417846
+                    }
+                }]
+            },
+            // Video outstream adUnit
+            {
+                code: 'video-outstream',
+                mediaTypes: {
+                    video: {
+                        context: 'outstream',
+                        playerSize: [640, 380],
+                        mimes: ['video/mp4'],
+                        minduration: 1,
+                        maxduration: 2,
+                    }
+                },
+                bids: [{
+                    bidder: 'buzzoola',
+                    params: {
+                        placementId: 417846
+                    }
+                }]
+            }
+            // TODO: native adUnit
+        ];
 
         var pbjs = pbjs || {};
         pbjs.que = pbjs.que || [];
