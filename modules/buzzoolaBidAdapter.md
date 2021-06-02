@@ -26,7 +26,7 @@ var adUnits = [
         bids: [{
             bidder: 'buzzoola',
             params: {
-                placementId: 417846
+                placementId: 417845
             }
         }]
     },
@@ -45,7 +45,7 @@ var adUnits = [
         bids: [{
             bidder: 'buzzoola',
             params: {
-                placementId: 417845
+                placementId: 417846
             }
         }]
     },
@@ -67,7 +67,44 @@ var adUnits = [
                 placementId: 417845
             }
         }]
+    },
+    // Native adUnit
+    {
+        code: '/21737252144/prebid_test_native',
+        mediaTypes: {
+            native: {
+                image: {
+                    required: true,
+                    sizes: [640, 134]
+                },
+                title: {
+                    required: true,
+                    len: 80
+                },
+                sponsoredBy: {
+                    required: true
+                },
+                clickUrl: {
+                    required: true
+                },
+                privacyLink: {
+                    required: false
+                },
+                body: {
+                    required: true
+                },
+                icon: {
+                    required: true,
+                    sizes: [50, 50]
+                }
+            }
+        },
+        bids: [{
+            bidder: 'buzzoola',
+            params: {
+                placementId: 417845
+            }
+        }]
     }
-    // TODO: native adUnit
 ];
 ```
